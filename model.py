@@ -114,5 +114,5 @@ if __name__ == "__main__":
 
     # Try to rerun
     time.sleep(60) # 60 seconds
-    st.experimental_rerun()
+    st.rerun()
         
