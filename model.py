@@ -90,7 +90,7 @@ def ai_modelling():
 
 def is_new_hour():
     current_hour = dt.now().hour
-    time.sleep(1)  # Sleep for a short time to avoid multiple reloads within the same hour
+    time.sleep(10)  # Sleep for a short time to avoid multiple reloads within the same hour
     return current_hour != dt.now().hour
 
 if __name__ == "__main__":
