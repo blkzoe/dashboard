@@ -12,17 +12,6 @@ from multiprocessing import freeze_support
 # Initialize the Binance exchange API
 exchange = ccxt.kucoin()
 
-def send_to_telegram(message):
-    apiToken = '5888707741:AAHkGp2FW3-Lrs7GxmXpbtfv7LCltgcIQb4'
-    chatID = '-1001884976731'
-    apiURL = f'https://api.telegram.org/bot{apiToken}/sendMessage'
-
-    try:
-        response = requests.post(apiURL, json={'chat_id': chatID, 'text': message})
-        print(response.text)
-    except Exception as e:
-        print(e)
-
 def ai_modelling():
     # Define the trading pair and timeframe
     symbol = 'BTC/USDT'
@@ -96,33 +85,34 @@ def is_new_hour():
 if __name__ == "__main__":
     freeze_support()
 
-    while True:
-        if is_new_hour():
-            st.experimental_rerun()
+    price, lppls_fit, positive_confidence, negative_confidence = ai_modelling()
+
+    # Create a figure with four subplots
+    fig, axs = plt.subplots(4, 1, figsize=(150, 120))
+
+    # Plot on the first subplot
+    axs[0].plot(price, color='blue')
+    axs[0].set_title('LOG PRICE')
+
+    # Plot on the second subplot
+    axs[1].plot(lppls_fit, color='purple')
+    axs[1].set_title('FITTED MA')
+
+    # Plot on the third subplot
+    axs[2].plot(positive_confidence, color='green')
+    axs[2].set_title('POSITIVE CONFIDENCE')
+
+    # Plot on the fourth subplot
+    axs[3].plot(negative_confidence, color='red')
+    axs[3].set_title('NEGATIVE CONFIDENCE')
+
+    # Adjust layout to prevent overlap
+    plt.tight_layout()
+
+    # Display the Matplotlib chart using Streamlit
+    st.pyplot(fig)
+
+    # Try to rerun
+    time.sleep(60) # 60 seconds
+    st.experimental_rerun()
         
-        price, lppls_fit, positive_confidence, negative_confidence = ai_modelling()
-
-        # Create a figure with four subplots
-        fig, axs = plt.subplots(4, 1, figsize=(15, 12))
-
-        # Plot on the first subplot
-        axs[0].plot(price, color='blue')
-        axs[0].set_title('LOG PRICE')
-
-        # Plot on the second subplot
-        axs[1].plot(lppls_fit, color='purple')
-        axs[1].set_title('FITTED MA')
-
-        # Plot on the third subplot
-        axs[2].plot(positive_confidence, color='green')
-        axs[2].set_title('POSITIVE CONFIDENCE')
-
-        # Plot on the fourth subplot
-        axs[3].plot(negative_confidence, color='red')
-        axs[3].set_title('NEGATIVE CONFIDENCE')
-
-        # Adjust layout to prevent overlap
-        plt.tight_layout()
-
-        # Display the Matplotlib chart using Streamlit
-        st.pyplot(fig)
