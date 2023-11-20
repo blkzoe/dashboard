@@ -88,7 +88,7 @@ if __name__ == "__main__":
     price, lppls_fit, positive_confidence, negative_confidence = ai_modelling()
 
     # Create a figure with four subplots
-    fig, axs = plt.subplots(4, 1, figsize=(150, 120))
+    fig, axs = plt.subplots(4, 1, figsize=(15, 12))
 
     # Plot on the first subplot
     axs[0].plot(price, color='blue')
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     # Display the Matplotlib chart using Streamlit
     st.pyplot(fig)
 
-    # # Try to rerun
-    # time.sleep(60) # 60 seconds
-    # st.experimental_rerun()
+    # Try to rerun
+    time.sleep(60) # 60 seconds
+    st.experimental_rerun()
         
