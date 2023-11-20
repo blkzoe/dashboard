@@ -112,7 +112,7 @@ if __name__ == "__main__":
     # Display the Matplotlib chart using Streamlit
     st.pyplot(fig)
 
-    # Try to rerun
-    time.sleep(60) # 60 seconds
-    st.experimental_rerun()
+    # # Try to rerun
+    # time.sleep(60) # 60 seconds
+    # st.experimental_rerun()
         
