@@ -55,6 +55,7 @@ def ai_modelling():
     time_ord = [pd.Timestamp.fromordinal(d) for d in lppls_model.observations[0, :].astype('int32')]
     t_obs = lppls_model.observations[0, :]
     lppls_fit = [lppls_model.lppls(t, tc, m, w, a, b, c1, c2) for t in t_obs]  # ------ FITTED MOVING AVERAGE
+    lppls_fit = lppls_fit[::-1]
     price = lppls_model.observations[1, :]
     true_price = [val for val in data['close']]
     """
